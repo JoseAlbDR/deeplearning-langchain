@@ -1,15 +1,16 @@
 import { HumanMessage } from '@langchain/core/messages';
 import { ChatOpenAI } from '@langchain/openai';
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export async function languageModel() {
   // Define Model
-  const model = new ChatOpenAI({ openAIApiKey: process.env.OPENAI_API_KEY });
+  const model = new ChatOpenAI();
 
   // Invoke Model with HumanMessage
   const response = await model.invoke([new HumanMessage('Tell me a joke')]);
 
-  console.log({ response });
+  console.log(response);
 
   /**
    *{

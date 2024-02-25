@@ -1,7 +1,7 @@
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ChatOpenAI } from '@langchain/openai';
-
-import('dotenv/config');
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export const langchainExpressionLanguage = async () => {
   const model = new ChatOpenAI();
@@ -11,10 +11,11 @@ export const langchainExpressionLanguage = async () => {
 
   const chain = prompt.pipe(model);
 
-  await chain.invoke({
+  const response = await chain.invoke({
     product: 'colorful socks',
   });
 
+  console.log(response);
   /**
    *  AIMessage {
         lc_serializable: true,

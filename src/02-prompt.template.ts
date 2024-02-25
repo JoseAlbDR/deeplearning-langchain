@@ -4,25 +4,26 @@ import {
   SystemMessagePromptTemplate,
   HumanMessagePromptTemplate,
 } from '@langchain/core/prompts';
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export const promptTemplate = async () => {
-  const model = new ChatOpenAI();
-
   const prompt = ChatPromptTemplate.fromTemplate(
     `What are three good names for a company that makes {product}?`
   );
 
-  await prompt.format({
+  const response = await prompt.format({
     product: 'colorful socks',
   });
 
+  console.log(response);
   //"Human: What are three good names for a company that makes colorful socks?"
 
-  await prompt.formatMessages({
+  const response2 = await prompt.formatMessages({
     product: 'colorful socks',
   });
 
+  console.log(response2);
   /**
    * [
         HumanMessage {
@@ -48,10 +49,11 @@ export const promptTemplate = async () => {
     ),
   ]);
 
-  await promptFromMessages.formatMessages({
+  const response3 = await promptFromMessages.formatMessages({
     product: 'shiny objects',
   });
 
+  console.log(response3);
   /**
    * [
         SystemMessage {
@@ -84,10 +86,11 @@ export const promptTemplate = async () => {
     ['human', 'What are three good names for a company that makes {product}?'],
   ]);
 
-  await promptFromMessagesSimplified.formatMessages({
+  const response4 = await promptFromMessagesSimplified.formatMessages({
     product: 'shiny objects',
   });
 
+  console.log(response4);
   /**
    * [
         SystemMessage {
